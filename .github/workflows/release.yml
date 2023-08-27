@@ -1,9 +1,8 @@
 name: "Skapa release"
 
 on:
-  push:
-    tags:
-      - '*'
+  release:
+    types: [created]
 
 jobs:
   build:
@@ -12,4 +11,5 @@ jobs:
     steps:
     - name: checkout repo
       uses: actions/checkout@v3.6.0
+    - run: echo "[Release name]: ${{ github.event.release.name }} [Release body]: ${{ github.event.release.body }}"
     - run: dotnet build TestRelease.sln --configuration release
