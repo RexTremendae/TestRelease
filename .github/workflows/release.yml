@@ -15,7 +15,7 @@ jobs:
     - run: echo "${{ github.ref_name }}"
     - run: echo "${{ github.ref_name }}" > github.ref.txt
     - run: dotnet build TestRelease.sln --configuration release
-    - run: dostuff.ps1
+    - run: ./dostuff.ps1
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
