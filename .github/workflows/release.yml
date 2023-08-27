@@ -1,15 +1,37 @@
 name: "Skapa release"
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - '*'
 
 jobs:
   build:
     name: Bygg!
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - name: checkout repo
       uses: actions/checkout@v3.6.0
-    - run: echo "${{ github.ref }}"
+    - run: echo "${{ github.ref_name }}"
+    - run: echo "${{ github.ref_name }}" > github.ref.txt
     - run: dotnet build TestRelease.sln --configuration release
+    - run: dostuff.ps1
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+    - name: Upload assets
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./release_info.txt
+        asset_name: release_info.txt
+        asset_content_type: application/text
