@@ -1,0 +1,14 @@
+name: "Skapa release"
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+  steps:
+    - name: Bygg
+      run: dotnet build --configuration release
