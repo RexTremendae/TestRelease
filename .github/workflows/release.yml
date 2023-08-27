@@ -10,8 +10,6 @@ jobs:
     name: Bygg!
     runs-on: ubuntu-latest
     steps:
-    - name: list files
-      uses: Rishabh510/Path-lister-action@master
-      with:
-        path: "."
+    - name: checkout repo
+      uses: actions/checkout@v3.6.0
     - run: dotnet build TestRelease.sln --configuration release
