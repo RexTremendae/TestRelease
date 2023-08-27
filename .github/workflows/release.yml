@@ -10,4 +10,4 @@ jobs:
     name: Bygg!
     runs-on: windows-latest
     steps:
-    - run: dotnet build --configuration release
+    - run: dotnet build TestRelease.sln --configuration release
