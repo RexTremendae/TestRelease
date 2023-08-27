@@ -11,5 +11,5 @@ jobs:
     steps:
     - name: checkout repo
       uses: actions/checkout@v3.6.0
-    - run: echo "${{ github.event.release.name }} ${{ github.event.release.body }}"
+    - run: echo "${{ github.ref }}"
     - run: dotnet build TestRelease.sln --configuration release
