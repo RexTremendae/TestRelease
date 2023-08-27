@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Bygg!
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
     - name: list files
       uses: Rishabh510/Path-lister-action@master
