@@ -46,7 +46,7 @@ function GetNextVersion()
         $new_minor_numeric = [int]$minor_part
         $new_patch_numeric = [int]$patch_part
 
-        # ---- Major version part ----
+        # ---- Major part (1.x.x) ----
         if ($new_major_numeric -gt $major_numeric)
         {
             $major_numeric = $new_major_numeric
@@ -60,7 +60,7 @@ function GetNextVersion()
             continue;
         }
 
-        # ---- Minor version part ----
+        # ---- Minor part (x.2.x) ----
         if ($new_minor_numeric -gt $minor_numeric)
         {
             $major_numeric = $new_major_numeric
@@ -74,7 +74,7 @@ function GetNextVersion()
             continue;
         }
 
-        # ---- Minor version part ----
+        # ---- Patch part (x.x.7) ----
         if ($new_patch_numeric -gt $patch_numeric)
         {
             $major_numeric = $new_major_numeric
@@ -103,6 +103,9 @@ if ([string[]] (git status --porcelain).Length -ne 0)
 
     exit;
 }
+
+# Make sure we have all the latest commits and tags
+git pull
 
 Write-Host 'Beräknar nästa versionsnummer...'
 $next_version = GetNextVersion
