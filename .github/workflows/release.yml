@@ -32,6 +32,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./release_info_${{ github.ref }}.txt
-        asset_name: release_info_${{ github.ref }}.txt
+        asset_path: ./release_info_${{ github.ref_name }}.txt
+        asset_name: release_info_${{ github.ref_name }}.txt
         asset_content_type: application/text
